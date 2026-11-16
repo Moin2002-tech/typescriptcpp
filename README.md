@@ -100,9 +100,20 @@ Open **http://localhost:5173** → the fractal renders in the browser.
 ### C++ server (root)
 
 ```bash
+# Debug build (default, with -g -O0)
 cmake -B cmake-build-debug -S .
 cmake --build cmake-build-debug
+
+# Release build with -O3 optimization
+cmake -B cmake-build-release -DCMAKE_BUILD_TYPE=Release -S .
+cmake --build cmake-build-release -j4
+
+# Run tests
+./cmake-build-release/typescriptcpp --list-test-cases
 ```
+
+> **Note:** Debug builds use `-g -O0 -DASSERTIONS_ENABLED` for easier debugging.
+> Release builds use `-O3 -DNDEBUG` for maximum performance.
 
 The build generates protobuf/gRPC stubs into `cmake-build-debug/generated/`
 (`fractal.pb.{h,cc}`, `fractal.grpc.pb.{h,cc}`) via the custom `protobuf::protoc`

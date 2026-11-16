@@ -4,6 +4,12 @@ project(typescriptcpp LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Release optimization (-O3) - applied when building with CMAKE_BUILD_TYPE=Release
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+# Debug build (keep it fast but debuggable)
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -DASSERTIONS_ENABLED")
+
 find_package(Protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
 
