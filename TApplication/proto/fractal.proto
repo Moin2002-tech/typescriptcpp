@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package fractal;
+
+message MandelbrotRequest {
+  double center_x = 1;
+  double center_y = 2;
+  double scale = 3;      // width of the view in the complex plane
+  int32 width = 4;
+  int32 height = 5;
+  int32 max_iter = 6;
+}
+
+message MandelbrotReply {
+  int32 width = 1;
+  int32 height = 2;
+  bytes iterations = 3;  // one uint16 per pixel, little endian
+  double compute_ms = 4; // pure C++ compute time
+}
+
+service Fractal {
+  rpc Render (MandelbrotRequest) returns (MandelbrotReply);
+}

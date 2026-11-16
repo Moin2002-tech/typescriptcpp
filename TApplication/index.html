@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fractal Forge · C++ + gRPC</title>
+    <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+<div class="shell">
+    <header>
+        <h1>Fractal Forge</h1>
+        <p>Mandelbrot computed in C++ over gRPC, drawn by TypeScript.</p>
+    </header>
+
+    <div class="layout">
+        <section class="stage">
+            <canvas id="canvas"></canvas>
+            <div class="overlay hidden" id="overlay">
+                <div class="spinner"></div>
+                <span id="overlayText">Rendering…</span>
+            </div>
+        </section>
+
+        <aside class="panel">
+            <div class="stat cpp">
+                <div class="value" id="cppMs">—</div>
+                <div class="label">C++ compute (ms)</div>
+            </div>
+            <div class="stat ts">
+                <div class="value" id="jsMs">—</div>
+                <div class="label">TypeScript compute (ms)</div>
+            </div>
+            <div class="stat speed">
+                <div class="value" id="speedup">—</div>
+                <div class="label">C++ speedup</div>
+            </div>
+
+            <label class="field">
+                Max iterations: <output id="iterOut">500</output>
+                <input id="iter" type="range" min="50" max="3000" step="10" value="500" />
+            </label>
+
+            <label class="field">
+                Resolution
+                <select id="res">
+                    <option value="640x400">640 × 400</option>
+                    <option value="960x600" selected>960 × 600</option>
+                    <option value="1280x800">1280 × 800</option>
+                </select>
+            </label>
+
+            <div class="buttons">
+                <div class="status" id="cppStatus">Not tested yet</div>
+                <button id="testCpp" class="ghost">Test C++ connection</button>
+                <button id="reset">Reset view</button>
+                <button id="bench" class="ghost">Benchmark in TypeScript</button>
+            </div>
+
+            <p class="hint">Click to zoom in. Shift-click to zoom out.</p>
+        </aside>
+    </div>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
